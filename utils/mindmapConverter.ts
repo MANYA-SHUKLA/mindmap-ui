@@ -17,7 +17,18 @@ const MAX_ANGLE_SPAN = Math.PI * 1.6; // Maximum angle span for children (288 de
 
 /**
  * Converts hierarchical mindmap data into React Flow nodes and edges
- * Uses an optimized radial hierarchical layout algorithm specifically designed for mindmaps
+ * 
+ * This function is the core of the data-driven rendering system. It takes a data structure
+ * (from JSON) and dynamically generates:
+ * - Node positions (calculated from hierarchy)
+ * - Node data (label, summary, description, metadata from JSON)
+ * - Edges (generated from parent-child relationships)
+ * 
+ * NO HARDCODED VALUES - Everything comes from the data structure.
+ * 
+ * @param rootNode - The root node from the JSON data structure
+ * @param collapsedNodes - Set of node IDs that are currently collapsed
+ * @returns Object containing dynamically generated nodes and edges
  */
 export function convertMindmapToFlow(
   rootNode: MindmapNode,

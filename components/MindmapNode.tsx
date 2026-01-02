@@ -12,16 +12,19 @@ interface NodeData {
   isHighlighted?: boolean;
   isHovered?: boolean;
   isSelected?: boolean;
+  isCollapsed?: boolean;
 }
 
 function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
   const isHighlighted = data.isHighlighted || false;
   const isHovered = data.isHovered || false;
   const isSelected = data.isSelected || selected || false;
+  const isCollapsed = data.isCollapsed || false;
+  const hasChildren = data.originalNode?.children && data.originalNode.children.length > 0;
 
   return (
     <div
-      className={`group relative px-5 py-4 rounded-xl min-w-[200px] transition-all duration-300 ease-out
+      className={`group relative px-5 py-4 rounded-xl min-w-[200px] cursor-pointer transition-all duration-300 ease-out
         ${
           isSelected
             ? 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white shadow-2xl shadow-purple-500/50 scale-110 border-2 border-white/50'
@@ -31,10 +34,12 @@ function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
         }
         ${isHovered && !isSelected ? 'scale-105 shadow-xl shadow-indigo-300/50 dark:shadow-indigo-800/50 border-indigo-400 dark:border-indigo-500' : ''}
         hover:scale-110 hover:shadow-2xl hover:shadow-purple-400/50 dark:hover:shadow-purple-600/50 hover:border-indigo-400/80 dark:hover:border-indigo-500/80
+        active:scale-105
         backdrop-blur-sm
       `}
       style={{
         animation: isSelected ? 'glow 2s ease-in-out infinite' : undefined,
+        transform: isSelected ? 'scale(1.1)' : isHovered && !isSelected ? 'scale(1.05)' : 'scale(1)',
       }}
     >
       {/* Glow effect on hover */}
@@ -63,6 +68,22 @@ function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
         >
           {data.label}
         </div>
+        {hasChildren && (
+          <div className={`absolute -top-2 -right-2 flex items-center gap-1 ${
+            isSelected ? 'opacity-80' : ''
+          }`}>
+            <div className={`w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg border-2 border-white/50 ${
+              isCollapsed ? 'animate-pulse' : ''
+            }`}>
+              {data.originalNode.children.length}
+            </div>
+            {isCollapsed && (
+              <div className="w-4 h-4 bg-indigo-500 rounded-full flex items-center justify-center text-white text-[10px] shadow-md border border-white/50">
+                +
+              </div>
+            )}
+          </div>
+        )}
         
         {data.metadata?.tags && (
           <div className="flex flex-wrap gap-1.5 justify-center">
