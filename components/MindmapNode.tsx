@@ -27,10 +27,10 @@ function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
             ? 'bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white shadow-2xl shadow-purple-500/50 scale-110 border-2 border-white/50'
             : isHighlighted
             ? 'bg-gradient-to-br from-indigo-400/90 via-purple-400/90 to-pink-400/90 text-white shadow-xl shadow-purple-400/40 scale-105 border-2 border-white/30'
-            : 'bg-gradient-to-br from-white/95 to-indigo-50/95 text-gray-800 shadow-lg shadow-indigo-200/30 border-2 border-indigo-200/50'
+            : 'bg-gradient-to-br from-white/95 to-indigo-50/95 dark:from-gray-800/95 dark:to-indigo-900/30 text-gray-800 dark:text-gray-100 shadow-lg shadow-indigo-200/30 dark:shadow-indigo-900/30 border-2 border-indigo-200/50 dark:border-indigo-700/50'
         }
-        ${isHovered && !isSelected ? 'scale-105 shadow-xl shadow-indigo-300/50 border-indigo-400' : ''}
-        hover:scale-110 hover:shadow-2xl hover:shadow-purple-400/50 hover:border-indigo-400/80
+        ${isHovered && !isSelected ? 'scale-105 shadow-xl shadow-indigo-300/50 dark:shadow-indigo-800/50 border-indigo-400 dark:border-indigo-500' : ''}
+        hover:scale-110 hover:shadow-2xl hover:shadow-purple-400/50 dark:hover:shadow-purple-600/50 hover:border-indigo-400/80 dark:hover:border-indigo-500/80
         backdrop-blur-sm
       `}
       style={{
@@ -58,7 +58,7 @@ function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
           className={`font-bold text-sm mb-2 transition-all duration-200 ${
             isSelected || isHighlighted
               ? 'text-white drop-shadow-lg'
-              : 'text-gray-800 group-hover:text-indigo-700'
+              : 'text-gray-800 dark:text-gray-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300'
           }`}
         >
           {data.label}
@@ -72,7 +72,7 @@ function MindmapNodeComponent({ data, selected }: NodeProps<NodeData>) {
                 className={`text-xs px-2.5 py-1 rounded-full font-medium transition-all duration-200 ${
                   isSelected || isHighlighted
                     ? 'bg-white/30 text-white backdrop-blur-sm border border-white/40'
-                    : 'bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 border border-indigo-200/50'
+                    : 'bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-700/50'
                 } group-hover:scale-110 group-hover:shadow-md`}
                 style={{
                   animationDelay: `${index * 100}ms`,

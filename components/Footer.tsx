@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-r from-indigo-500/90 via-purple-500/90 to-pink-500/90 backdrop-blur-xl border-t-2 border-white/20 shadow-2xl">
+    <footer className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-r from-indigo-500/90 via-purple-500/90 to-pink-500/90 dark:from-indigo-600/90 dark:via-purple-600/90 dark:to-pink-600/90 backdrop-blur-xl border-t-2 border-white/20 dark:border-gray-700/30 shadow-2xl">
       <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
           {/* Made with love text */}
