@@ -78,8 +78,6 @@ export default function Footer() {
               </svg>
               GitHub
             </a>
-
-            {/* WhatsApp */}
             <a
               href="https://wa.me/8005586588"
               target="_blank"
