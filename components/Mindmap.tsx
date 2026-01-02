@@ -18,6 +18,7 @@ import { MindmapNode, MindmapData } from '@/types/mindmap';
 import { convertMindmapToFlow } from '@/utils/mindmapConverter';
 import MindmapNodeComponent from './MindmapNode';
 import SidePanel from './SidePanel';
+import DarkModeToggle from './DarkModeToggle';
 
 interface MindmapProps {
   data: MindmapData;
@@ -229,17 +230,17 @@ export default function Mindmap({ data }: MindmapProps) {
 
     return (
       <div className="absolute top-4 left-4 z-50 animate-fade-in">
-        <div className="bg-gradient-to-br from-white/95 via-indigo-50/95 to-purple-50/95 backdrop-blur-xl border-2 border-indigo-200/50 rounded-2xl shadow-2xl p-5 max-w-sm transform transition-all duration-300 hover:scale-105">
-          <h3 className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+        <div className="bg-gradient-to-br from-white/95 via-indigo-50/95 to-purple-50/95 dark:from-gray-900/95 dark:via-indigo-900/30 dark:to-purple-900/30 backdrop-blur-xl border-2 border-indigo-200/50 dark:border-indigo-700/50 rounded-2xl shadow-2xl p-5 max-w-sm transform transition-all duration-300 hover:scale-105">
+          <h3 className="font-bold text-lg bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
             {node.label}
           </h3>
-          <p className="text-sm text-gray-700 leading-relaxed mb-3">{node.summary}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-3">{node.summary}</p>
           {node.metadata?.tags && (
             <div className="flex flex-wrap gap-2 mt-3">
               {node.metadata.tags.map((tag: string) => (
                 <span
                   key={tag}
-                  className="text-xs px-3 py-1.5 bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-700 rounded-full font-medium border border-indigo-200/50 shadow-sm hover:scale-110 transition-transform duration-200"
+                  className="text-xs px-3 py-1.5 bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50 text-indigo-700 dark:text-indigo-300 rounded-full font-medium border border-indigo-200/50 dark:border-indigo-700/50 shadow-sm hover:scale-110 transition-transform duration-200"
                 >
                   {tag}
                 </span>
@@ -275,7 +276,7 @@ export default function Mindmap({ data }: MindmapProps) {
           variant="dots"
         />
         <Controls 
-          className="!bg-white/80 !backdrop-blur-xl !border-2 !border-indigo-200/50 !rounded-xl !shadow-xl"
+          className="!bg-white/80 dark:!bg-gray-900/80 !backdrop-blur-xl !border-2 !border-indigo-200/50 dark:!border-indigo-700/50 !rounded-xl !shadow-xl"
           style={{ button: { backgroundColor: 'rgba(99, 102, 241, 0.1)', border: 'none' } }}
         />
         <MiniMap
@@ -285,15 +286,18 @@ export default function Mindmap({ data }: MindmapProps) {
             return '#a5b4fc';
           }}
           maskColor="rgba(0, 0, 0, 0.2)"
-          className="!bg-white/80 !backdrop-blur-xl !border-2 !border-indigo-200/50 !rounded-xl !shadow-xl"
+          className="!bg-white/80 dark:!bg-gray-900/80 !backdrop-blur-xl !border-2 !border-indigo-200/50 dark:!border-indigo-700/50 !rounded-xl !shadow-xl"
         />
         <Panel position="top-left" className="m-4">
-          <div className="bg-gradient-to-br from-white/95 via-indigo-50/95 to-purple-50/95 backdrop-blur-xl rounded-2xl shadow-2xl p-5 space-y-3 border-2 border-indigo-200/50 animate-fade-in">
-            <div className="mb-4">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                {mindmapData.title || 'Mindmap'}
-              </h2>
-              <div className="h-1 w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
+          <div className="bg-gradient-to-br from-white/95 via-indigo-50/95 to-purple-50/95 dark:from-gray-900/95 dark:via-indigo-900/30 dark:to-purple-900/30 backdrop-blur-xl rounded-2xl shadow-2xl p-5 space-y-3 border-2 border-indigo-200/50 dark:border-indigo-700/50 animate-fade-in">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
+                  {mindmapData.title || 'Mindmap'}
+                </h2>
+                <div className="h-1 w-24 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full"></div>
+              </div>
+              <DarkModeToggle />
             </div>
             <button
               onClick={handleFitView}
