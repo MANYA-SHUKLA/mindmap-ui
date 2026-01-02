@@ -1,0 +1,183 @@
+{
+  "title": "Interactive Mindmap",
+  "version": "1.0.0",
+  "root": {
+    "id": "root",
+    "label": "Frontend Development",
+    "summary": "Core concepts and technologies in modern frontend development",
+    "description": "Frontend development encompasses all aspects of building user interfaces and user experiences for web applications. This mindmap explores the key technologies, frameworks, and concepts that power modern web development.",
+    "metadata": {
+      "tags": ["web", "development", "frontend"],
+      "notes": "This is the root node of the mindmap"
+    },
+    "children": [
+      {
+        "id": "frameworks",
+        "label": "Frameworks & Libraries",
+        "summary": "Popular frontend frameworks and libraries",
+        "description": "Modern frontend development relies heavily on frameworks and libraries that provide structure, reactivity, and reusable components. These tools help developers build complex applications more efficiently.",
+        "metadata": {
+          "tags": ["frameworks", "libraries"],
+          "inputs": ["JavaScript/TypeScript knowledge"],
+          "outputs": ["Reusable components", "State management"]
+        },
+        "children": [
+          {
+            "id": "react",
+            "label": "React",
+            "summary": "A JavaScript library for building user interfaces",
+            "description": "React is a declarative, efficient, and flexible JavaScript library for building user interfaces. It lets you compose complex UIs from small and isolated pieces of code called components.",
+            "metadata": {
+              "tags": ["library", "ui"],
+              "notes": "Most popular frontend library"
+            }
+          },
+          {
+            "id": "nextjs",
+            "label": "Next.js",
+            "summary": "React framework for production",
+            "description": "Next.js is a React framework that enables functionality such as server-side rendering and generating static websites. It provides a great developer experience with features like automatic code splitting, optimized performance, and easy deployment.",
+            "metadata": {
+              "tags": ["framework", "react", "ssr"],
+              "notes": "Built on top of React"
+            }
+          },
+          {
+            "id": "vue",
+            "label": "Vue.js",
+            "summary": "Progressive JavaScript framework",
+            "description": "Vue.js is a progressive framework for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable.",
+            "metadata": {
+              "tags": ["framework", "progressive"]
+            }
+          }
+        ]
+      },
+      {
+        "id": "styling",
+        "label": "Styling Solutions",
+        "summary": "CSS frameworks and styling approaches",
+        "description": "Styling is crucial for creating visually appealing and responsive user interfaces. Modern development offers various approaches from utility-first CSS frameworks to CSS-in-JS solutions.",
+        "metadata": {
+          "tags": ["styling", "css"],
+          "inputs": ["Design requirements"],
+          "outputs": ["Styled components", "Responsive layouts"]
+        },
+        "children": [
+          {
+            "id": "tailwind",
+            "label": "Tailwind CSS",
+            "summary": "Utility-first CSS framework",
+            "description": "Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to build custom designs without leaving your HTML. It's highly customizable and enables rapid UI development.",
+            "metadata": {
+              "tags": ["utility-first", "css-framework"],
+              "notes": "Version 4 is the latest"
+            }
+          },
+          {
+            "id": "css-modules",
+            "label": "CSS Modules",
+            "summary": "Scoped CSS for components",
+            "description": "CSS Modules allow you to write CSS that is scoped to a component, preventing style conflicts and making styles more maintainable.",
+            "metadata": {
+              "tags": ["scoped", "css"]
+            }
+          },
+          {
+            "id": "styled-components",
+            "label": "Styled Components",
+            "summary": "CSS-in-JS library",
+            "description": "Styled Components is a CSS-in-JS library that lets you write actual CSS code to style your components. It removes the mapping between components and styles.",
+            "metadata": {
+              "tags": ["css-in-js", "react"]
+            }
+          }
+        ]
+      },
+      {
+        "id": "state-management",
+        "label": "State Management",
+        "summary": "Managing application state",
+        "description": "State management is a critical aspect of frontend development, especially for complex applications. Various solutions exist to handle local and global state efficiently.",
+        "metadata": {
+          "tags": ["state", "data"],
+          "inputs": ["Component state", "User interactions"],
+          "outputs": ["Global state", "Persisted data"]
+        },
+        "children": [
+          {
+            "id": "redux",
+            "label": "Redux",
+            "summary": "Predictable state container",
+            "description": "Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently and are easy to test.",
+            "metadata": {
+              "tags": ["state-management", "predictable"]
+            }
+          },
+          {
+            "id": "zustand",
+            "label": "Zustand",
+            "summary": "Lightweight state management",
+            "description": "Zustand is a small, fast, and scalable state management solution. It has a simple API and doesn't require boilerplate code.",
+            "metadata": {
+              "tags": ["state-management", "lightweight"],
+              "notes": "Minimal boilerplate"
+            }
+          },
+          {
+            "id": "context",
+            "label": "React Context",
+            "summary": "Built-in React state sharing",
+            "description": "React Context provides a way to pass data through the component tree without having to pass props down manually at every level.",
+            "metadata": {
+              "tags": ["react", "built-in"]
+            }
+          }
+        ]
+      },
+      {
+        "id": "tools",
+        "label": "Development Tools",
+        "summary": "Essential tools for frontend development",
+        "description": "Modern frontend development relies on a variety of tools for building, testing, and optimizing applications. These tools improve developer productivity and application quality.",
+        "metadata": {
+          "tags": ["tools", "development"],
+          "inputs": ["Source code"],
+          "outputs": ["Optimized bundles", "Test reports"]
+        },
+        "children": [
+          {
+            "id": "webpack",
+            "label": "Webpack",
+            "summary": "Module bundler",
+            "description": "Webpack is a static module bundler for modern JavaScript applications. It processes your application and builds a dependency graph.",
+            "metadata": {
+              "tags": ["bundler", "build-tool"]
+            }
+          },
+          {
+            "id": "vite",
+            "label": "Vite",
+            "summary": "Next generation frontend tooling",
+            "description": "Vite is a build tool that provides a faster and leaner development experience for modern web projects. It uses native ES modules and provides instant server start.",
+            "metadata": {
+              "tags": ["bundler", "fast", "dev-server"],
+              "notes": "Very fast HMR"
+            }
+          },
+          {
+            "id": "typescript",
+            "label": "TypeScript",
+            "summary": "Typed superset of JavaScript",
+            "description": "TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale. It adds static type definitions to JavaScript.",
+            "metadata": {
+              "tags": ["language", "types", "tooling"],
+              "notes": "Improves code quality and maintainability"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
