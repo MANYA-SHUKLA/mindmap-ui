@@ -274,51 +274,6 @@ Modify the layout algorithm in `mindmapConverter.ts`:
 
 - **Export/Download Functionality**: Click "Export JSON" button to download the current mindmap data as a JSON file. This allows you to save your edits and share the data structure.
 
-### Future Enhancements (Optional)
-
-- Export as PNG/SVG images
-- Undo/Redo for edits
-- Search and filter nodes
-- Multiple mindmap support
-- Drag-and-drop node reordering
-- Node creation/deletion in UI
-- Keyboard shortcuts
-- Dark mode toggle
-
-## 📸 Screenshots
-
-The application includes:
-- Full mindmap view with all nodes and connections
-- Hover tooltips showing node summaries
-- Side panel with detailed node information
-- Highlighted nodes and edges on selection
-- Expand/collapse functionality
-
-## 🤝 Evaluation Criteria Alignment
-
-### Correctness ✅
-- All required features implemented
-- Data-driven design with JSON file
-- Clean separation of data and UI
-
-### UI/UX Quality ✅
-- Clear, intuitive interface
-- Smooth interactions and transitions
-- Responsive feedback to user actions
-- Professional visual design
-
-### Code Quality ✅
-- Well-structured, modular components
-- TypeScript for type safety
-- Readable and maintainable code
-- Proper separation of concerns
-
-### Problem-Solving Approach ✅
-- Thoughtful handling of interactions
-- Efficient state management
-- Scalable architecture
-- Clear data flow
-
 ## 📄 License
 
 This project is created as an assignment submission.
