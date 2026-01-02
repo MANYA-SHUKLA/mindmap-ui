@@ -39,6 +39,16 @@ export default function Mindmap({ data }: MindmapProps) {
   const [showSidePanel, setShowSidePanel] = useState(false);
   const reactFlowInstance = useRef<ReactFlowInstance | null>(null);
 
+  // Sync internal state when data prop changes (data-driven visualization)
+  useEffect(() => {
+    setMindmapData(data);
+    // Reset selection state when data changes
+    setSelectedNodeId(null);
+    setShowSidePanel(false);
+    setHighlightedNodes(new Set());
+    setCollapsedNodes(new Set());
+  }, [data]);
+
   // Find node in the tree
   const findNode = useCallback(
     (nodeId: string, node: MindmapNode = mindmapData.root): MindmapNode | null => {
@@ -273,11 +283,9 @@ export default function Mindmap({ data }: MindmapProps) {
           color="rgba(99, 102, 241, 0.1)" 
           gap={20}
           size={1}
-          variant="dots"
         />
         <Controls 
           className="!bg-white/80 dark:!bg-gray-900/80 !backdrop-blur-xl !border-2 !border-indigo-200/50 dark:!border-indigo-700/50 !rounded-xl !shadow-xl"
-          style={{ button: { backgroundColor: 'rgba(99, 102, 241, 0.1)', border: 'none' } }}
         />
         <MiniMap
           nodeColor={(node) => {

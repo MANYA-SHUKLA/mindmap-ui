@@ -234,11 +234,16 @@ Currently using React's built-in state management (`useState`, `useMemo`, `useCa
 
 ### Layout Algorithm
 
-The layout uses a radial, hierarchical approach:
-- Root node is centered
-- First-level children are distributed in a circle around the root
-- Deeper levels use a fan layout relative to their parent
-- Spacing is automatically calculated to prevent overlaps
+The layout uses an optimized radial, hierarchical approach specifically designed for mindmap visualization:
+- **Root node**: Positioned at the center (0, 0)
+- **First-level children**: Distributed evenly in a full circle (360°) around the root
+- **Deeper levels**: Use an intelligent fan layout that:
+  - Distributes children in a fan pattern relative to their parent's angle
+  - Automatically scales radius based on tree depth (deeper nodes are closer)
+  - Calculates optimal angle spans to prevent overlaps
+  - Aligns children along the parent's radial direction
+- **Adaptive spacing**: Automatically adjusts based on number of siblings and tree depth
+- **Prevents overlaps**: Uses minimum spacing calculations and maximum angle span constraints
 
 ## 🎨 Customization
 

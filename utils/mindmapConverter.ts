@@ -9,20 +9,28 @@ interface NodeData {
   originalNode: MindmapNode;
 }
 
-const NODE_WIDTH = 200;
-const NODE_HEIGHT = 100;
-const HORIZONTAL_SPACING = 350;
-const VERTICAL_SPACING = 200;
+// Layout constants optimized for mindmap visualization
+const BASE_RADIUS = 250; // Base distance from parent to children
+const LEVEL_SCALE = 0.85; // Scale factor for each level (children get progressively closer)
+const MIN_SPACING = 180; // Minimum spacing between nodes at the same level
+const MAX_ANGLE_SPAN = Math.PI * 1.6; // Maximum angle span for children (288 degrees)
 
+/**
+ * Converts hierarchical mindmap data into React Flow nodes and edges
+ * Uses an optimized radial hierarchical layout algorithm specifically designed for mindmaps
+ */
 export function convertMindmapToFlow(
   rootNode: MindmapNode,
   collapsedNodes: Set<string> = new Set()
 ): { nodes: Node<NodeData>[]; edges: Edge[] } {
   const nodes: Node<NodeData>[] = [];
   const edges: Edge[] = [];
-  const nodePositions = new Map<string, { x: number; y: number }>();
 
-  // Calculate positions using a hierarchical layout
+  /**
+   * Calculate positions using an optimized radial hierarchical layout
+   * This algorithm distributes nodes in a circular pattern around their parent,
+   * creating an intuitive mindmap visualization
+   */
   function calculatePositions(
     node: MindmapNode,
     level: number = 0,
@@ -30,37 +38,52 @@ export function convertMindmapToFlow(
     parentX: number = 0,
     parentY: number = 0,
     siblingCount: number = 1,
+    parentAngle: number = 0, // Angle from grandparent to parent (for alignment)
     parentId: string | null = null
   ) {
     const isCollapsed = collapsedNodes.has(node.id);
     const hasChildren = node.children && node.children.length > 0 && !isCollapsed;
 
     let x: number, y: number;
+    let angle: number;
 
     if (level === 0) {
       // Root node at center
       x = 0;
       y = 0;
+      angle = 0;
     } else {
-      // Use a radial layout for mindmap - distribute children around parent
-      // For level 1, use a circle around root
-      // For deeper levels, use a more structured approach
-      if (level === 1) {
-        // First level: distribute evenly in a circle
-        const angle = (index / siblingCount) * Math.PI * 2;
-        const radius = HORIZONTAL_SPACING;
-        x = parentX + Math.cos(angle) * radius;
-        y = parentY + Math.sin(angle) * radius;
-      } else {
-        // Deeper levels: use a fan layout
-        const angle = (index / siblingCount) * Math.PI * 1.5 - Math.PI * 0.75;
-        const radius = HORIZONTAL_SPACING;
-        x = parentX + Math.cos(angle) * radius;
-        y = parentY + Math.sin(angle) * radius;
-      }
-    }
+      // Calculate radius based on level (deeper levels have smaller radius)
+      const radius = BASE_RADIUS * Math.pow(LEVEL_SCALE, level - 1);
 
-    nodePositions.set(node.id, { x, y });
+      if (level === 1) {
+        // First level: distribute evenly in a full circle around root
+        angle = (index / siblingCount) * Math.PI * 2;
+      } else {
+        // Deeper levels: distribute children in a fan around parent
+        // Calculate the angle span based on number of siblings
+        const angleSpan = Math.min(
+          MAX_ANGLE_SPAN,
+          siblingCount * (MIN_SPACING / radius)
+        );
+
+        // Start angle relative to parent's angle
+        const startAngle = parentAngle - angleSpan / 2;
+        
+        // Distribute children evenly within the angle span
+        if (siblingCount === 1) {
+          // Single child: place it in the direction of parent's angle
+          angle = parentAngle;
+        } else {
+          // Multiple children: distribute evenly
+          angle = startAngle + (index / (siblingCount - 1)) * angleSpan;
+        }
+      }
+
+      // Calculate position using polar coordinates
+      x = parentX + Math.cos(angle) * radius;
+      y = parentY + Math.sin(angle) * radius;
+    }
 
     // Create node
     nodes.push({
@@ -87,7 +110,7 @@ export function convertMindmapToFlow(
       });
     }
 
-    // Process children
+    // Process children recursively
     if (hasChildren && node.children) {
       const childCount = node.children.length;
       node.children.forEach((child, childIndex) => {
@@ -98,12 +121,14 @@ export function convertMindmapToFlow(
           x,
           y,
           childCount,
+          angle, // Pass current angle as parent angle for children
           node.id
         );
       });
     }
   }
 
+  // Start layout calculation from root
   calculatePositions(rootNode);
 
   return { nodes, edges };
